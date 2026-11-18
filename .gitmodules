@@ -1,0 +1,3 @@
+[submodule "partC-layerzero-oapp/lib/forge-std"]
+	path = partC-layerzero-oapp/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
