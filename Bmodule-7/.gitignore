@@ -1,0 +1,9 @@
+﻿# Foundry
+out/
+cache/
+broadcast/
+.env
+
+# OS
+.DS_Store
+Thumbs.db

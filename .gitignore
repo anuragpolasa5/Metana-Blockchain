@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+
+# Hardhat build artifacts
+artifacts/
+cache/
+build/
+typechain-types/
+.hardhat_node
+
+# Coverage reports
+coverage/
+coverage.json
+
+# Gas reporter
+gasReporterOutput.json
+
+# Deployment artifacts
+deployed-addresses.json
+
+# Auto-generated frontend config (written by deploy script)
+frontend/config.js
+
+# Remix IDE artifacts
+.deps/
+.learneth/
+.states/
+
+# Sensitive config
+coti_wallet_config.json
+
+# Environment files (never commit private keys!)
+.env
+.env.local
+.env.*.local
+.env.local.*
+*.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LearnToken (LRN) – Token Sale DApp</title>
+  <meta name="description" content="Buy and sell LearnToken (LRN) with ETH. Decentralised token sale powered by Ethereum Sepolia testnet." />
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- ethers.js v6 CDN (UMD build) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.umd.min.js"></script>
+</head>
+<body>
+  <!-- ──────────────────── APP WRAPPER ──────────────────── -->
+  <div class="app-wrapper">
+
+    <!-- ── HEADER ── -->
+    <header class="app-header">
+      <div class="logo-group">
+        <div class="logo-icon" role="img" aria-label="token logo">⚡</div>
+        <div>
+          <div class="logo-title">LearnToken Sale</div>
+          <div class="logo-subtitle">Powered by Ethereum · Sepolia</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <div class="network-badge" id="network-badge">
+          <div class="network-dot" id="network-dot"></div>
+          <span id="network-name">Not connected</span>
+        </div>
+        <button id="btn-connect">Connect Wallet</button>
+      </div>
+    </header>
+
+    <!-- ── HERO ── -->
+    <section class="hero" aria-label="DApp introduction">
+      <h1 class="hero-title">Trade LearnToken<br/>with Ethereum</h1>
+      <p class="hero-sub">
+        A decentralised token sale on Sepolia. Buy LRN with ETH or sell your tokens back to the contract at any time.
+      </p>
+      <div class="hero-prices">
+        <div class="price-pill buy-price">🟢 Buy&nbsp;<span>0.001 ETH</span>&nbsp;/ LRN</div>
+        <div style="color:var(--border);user-select:none">│</div>
+        <div class="price-pill sell-price">🔴 Sell&nbsp;<span>0.0005 ETH</span>&nbsp;/ LRN</div>
+      </div>
+    </section>
+
+    <!-- ── WALLET PROMPT (shown when not connected) ── -->
+    <div id="wallet-prompt" class="wallet-prompt">
+      <div class="wallet-prompt-icon">🦊</div>
+      <h2>Connect your wallet to start</h2>
+      <p>Click <strong>Connect Wallet</strong> above to link MetaMask. The DApp will automatically switch to the Sepolia testnet.</p>
+    </div>
+
+    <!-- ── MAIN CONTENT (hidden until connected) ── -->
+    <main id="main-content" style="display:none;" aria-label="Token sale interface">
+
+      <!-- ── STATS ROW ── -->
+      <section class="stats-grid" aria-label="Balances and prices">
+        <div class="stat-card">
+          <div class="stat-label">ETH Balance</div>
+          <div class="stat-value highlight-cyan" id="eth-balance">—</div>
+          <div class="stat-sub">Your wallet ETH</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">LRN Balance</div>
+          <div class="stat-value highlight-purple" id="lrn-balance">—</div>
+          <div class="stat-sub">LearnToken (LRN)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Contract ETH</div>
+          <div class="stat-value highlight-green" id="contract-eth">—</div>
+          <div class="stat-sub">Available for sell-back</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Tokens Minted</div>
+          <div class="stat-value" id="total-supply">—</div>
+          <div class="stat-sub">of 1,000,000 LRN max</div>
+        </div>
+      </section>
+
+      <!-- ── SUPPLY PROGRESS ── -->
+      <section class="supply-section" aria-label="Token supply progress">
+        <div class="supply-header">
+          <span class="supply-label">Supply progress</span>
+          <span class="supply-pct" id="supply-pct">0%</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progress-track">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <p class="supply-capped" id="supply-capped-msg">⚠ Maximum supply reached – buying is disabled.</p>
+      </section>
+
+      <!-- ── TRADE CARDS ── -->
+      <section class="trade-grid" aria-label="Buy and sell tokens">
+
+        <!-- BUY CARD -->
+        <div class="trade-card buy-card">
+          <div class="trade-card-header">
+            <div class="trade-icon">🛒</div>
+            <div>
+              <div class="trade-title">Buy LRN</div>
+              <div class="trade-desc">Pay ETH · receive LRN tokens</div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="buy-amount">Amount of LRN</label>
+            <div class="input-wrapper">
+              <input
+                type="number"
+                id="buy-amount"
+                class="token-input"
+                placeholder="10"
+                min="1"
+                step="1"
+                aria-describedby="buy-eth-cost"
+              />
+              <span class="input-suffix">LRN</span>
+            </div>
+            <div class="eth-estimate" id="buy-eth-cost">
+              Cost: <span>—</span>
+            </div>
+          </div>
+
+          <button
+            id="btn-buy"
+            class="btn-action btn-buy"
+            disabled
+            aria-describedby="buy-disabled-reason"
+          >
+            Buy Tokens
+          </button>
+          <div class="disabled-reason" id="buy-disabled-reason"></div>
+        </div>
+
+        <!-- SELL CARD -->
+        <div class="trade-card sell-card">
+          <div class="trade-card-header">
+            <div class="trade-icon">💰</div>
+            <div>
+              <div class="trade-title">Sell LRN</div>
+              <div class="trade-desc">Return LRN · receive ETH</div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="sell-amount">Amount of LRN</label>
+            <div class="input-wrapper">
+              <input
+                type="number"
+                id="sell-amount"
+                class="token-input"
+                placeholder="5"
+                min="1"
+                step="1"
+                aria-describedby="sell-eth-receive"
+              />
+              <span class="input-suffix">LRN</span>
+            </div>
+            <div class="eth-estimate" id="sell-eth-receive">
+              Receive: <span>—</span>
+            </div>
+          </div>
+
+          <button
+            id="btn-sell"
+            class="btn-action btn-sell"
+            disabled
+            aria-describedby="sell-disabled-reason"
+          >
+            Sell Tokens
+          </button>
+          <div class="disabled-reason" id="sell-disabled-reason"></div>
+        </div>
+      </section>
+
+      <!-- ── CONTRACT INFO ── -->
+      <section class="info-section" aria-label="Contract information">
+        <div class="info-title">Contract Addresses</div>
+        <div class="info-rows">
+          <div class="info-row">
+            <span class="info-key">LearnToken (LRN)</span>
+            <span class="info-val" id="addr-token">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">TokenSale</span>
+            <span class="info-val" id="addr-sale">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Network</span>
+            <span class="info-val">Sepolia Testnet</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">LRN Reserve (contract)</span>
+            <span class="info-val" id="token-reserve">—</span>
+          </div>
+        </div>
+      </section>
+
+    </main><!-- /#main-content -->
+  </div><!-- /.app-wrapper -->
+
+  <!-- ── TOAST CONTAINER ── -->
+  <div id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- ── Config (generated by deploy script) ── -->
+  <script src="config.js"></script>
+
+  <!-- ── Main app logic ── -->
+  <script src="app.js"></script>
+</body>
+</html>
