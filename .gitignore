@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Hardhat build artifacts
+artifacts/
+cache/
+build/
+
+# Remix IDE artifacts
+.deps/
+.learneth/
+.states/
+
+# Sensitive config
+coti_wallet_config.json
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+
+# Hardhat
+.hardhat_node
+
+# Coverage
+typechain-types/
+coverage/
+coverage.json
