@@ -1,0 +1,54 @@
+# Compiler files
+cache/
+out/
+
+# Commonly ignored directories
+.logs/
+.ignore/
+
+# Ignores development broadcast logs
+!/broadcast
+/broadcast/*/31337/
+/broadcast/**/dry-run/
+
+# Docs
+docs/
+
+# Dotenv file
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+yarn.lock
+
+# Artifacts
+artifacts/
+build/
+
+# Environment variables
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+
+# Hardhat
+.hardhat_node
+
+# package-lock (regeneratable)
+package-lock.json
+
+# Coverage
+typechain-types/
+coverage/
+coverage.json

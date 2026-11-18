@@ -1,0 +1,28 @@
+{
+  "name": "deterministic-escrow-suite",
+  "version": "1.0.0",
+  "description": "On-chain deterministic escrow platform with CREATE2 factory and signature-based release",
+  "main": "index.js",
+  "scripts": {
+    "test": "hardhat test --config hardhat.config.cjs",
+    "compile": "hardhat compile --config hardhat.config.cjs",
+    "deploy_sepolia": "hardhat run scripts/deploy.cjs --network sepolia --config hardhat.config.cjs",
+    "deploy_amoy": "hardhat run scripts/deploy.cjs --network amoy --config hardhat.config.cjs"
+  },
+  "keywords": [
+    "solidity",
+    "escrow",
+    "create2",
+    "hardhat",
+    "defi",
+    "web3"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@openzeppelin/contracts": "^5.6.1",
+    "ethers": "^6.16.0",
+    "hardhat": "^2.28.6"
+  }
+}
