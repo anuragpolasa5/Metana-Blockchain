@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Environment files (never commit private keys!)
+.env
+.env.local
+.env.*.local
+.env.local.*
+*.env.*
+
+# Hardhat build artifacts
+artifacts/
+cache/
+build/
+typechain-types/
+.hardhat_node
+
+# Coverage reports
+coverage/
+coverage.json
+
+# Gas reporter
+gasReporterOutput.json
+
+# Auto-generated frontend config (written by deploy script)
+frontend/config.js
+
+# Remix IDE artifacts
+.deps/
+.learneth/
+.states/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
