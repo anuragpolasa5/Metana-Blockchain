@@ -1,0 +1,7 @@
+# Echidna configuration for Exercise 5 - Naive Receiver
+testMode: property
+testLimit: 50000
+# Multi-abi allows Echidna to call functions from all contracts
+multi-abi: true
+# Supply the test contract with enough ETH
+balanceContract: 1100000000000000000000

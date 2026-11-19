@@ -1,0 +1,21 @@
+{
+  "name": "layerzero-oapp-messenger",
+  "version": "1.0.0",
+  "description": "LayerZero OApp for cross-chain messaging between Optimism Sepolia and Arbitrum Sepolia (L2-11 to L2-16)",
+  "scripts": {
+    "compile": "forge build",
+    "test": "forge test -vvv",
+    "deploy:optimism": "forge script script/Deploy.s.sol --rpc-url optimism_sepolia --broadcast --verify",
+    "deploy:arbitrum": "forge script script/Deploy.s.sol --rpc-url arbitrum_sepolia --broadcast --verify",
+    "set-peer:optimism": "forge script script/SetPeer.s.sol --rpc-url optimism_sepolia --broadcast",
+    "set-peer:arbitrum": "forge script script/SetPeer.s.sol --rpc-url arbitrum_sepolia --broadcast"
+  },
+  "devDependencies": {
+    "@layerzerolabs/lz-evm-messagelib-v2": "^3.0.168",
+    "@layerzerolabs/lz-evm-protocol-v2": "^2.3.0",
+    "@layerzerolabs/oapp-evm": "^0.0.3",
+    "@layerzerolabs/test-devtools-evm-foundry": "^0.0.3",
+    "@openzeppelin/contracts": "^5.1.0",
+    "solidity-bytes-utils": "^0.8.4"
+  }
+}

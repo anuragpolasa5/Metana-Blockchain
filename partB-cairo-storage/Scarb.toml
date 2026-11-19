@@ -1,0 +1,14 @@
+[package]
+name = "simple_storage"
+version = "0.1.0"
+edition = "2024_07"
+
+[dependencies]
+starknet = "2.9.2"
+
+[dev-dependencies]
+snforge_std = "0.42.0"
+
+[[target.starknet-contract]]
+sierra = true
+casm = true

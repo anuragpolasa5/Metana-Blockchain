@@ -1,0 +1,20 @@
+{
+  "name": "zksync-erc20-token",
+  "version": "1.0.0",
+  "description": "ERC-20 Token deployed on zkSync Era (L2-2, L2-3, L2-4)",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "deploy": "npx hardhat deploy-zksync --script deploy.ts",
+    "verify": "npx hardhat verify --network zkSyncSepolia"
+  },
+  "devDependencies": {
+    "@matterlabs/hardhat-zksync": "^1.2.0",
+    "@openzeppelin/contracts": "^5.1.0",
+    "ethers": "^6.13.0",
+    "hardhat": "^2.22.0",
+    "typescript": "^5.4.0",
+    "ts-node": "^10.9.0",
+    "@types/node": "^20.0.0",
+    "dotenv": "^16.4.0"
+  }
+}

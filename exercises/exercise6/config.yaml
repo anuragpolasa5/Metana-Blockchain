@@ -1,0 +1,4 @@
+# Echidna configuration for Exercise 6 - Unstoppable Lender
+testMode: property
+testLimit: 50000
+multi-abi: true

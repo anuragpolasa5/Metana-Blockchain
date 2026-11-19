@@ -1,0 +1,6 @@
+# Echidna configuration for Exercise 7 - Side Entrance
+testMode: property
+testLimit: 50000
+multi-abi: true
+# Supply the test contract with enough ETH for setup
+balanceContract: 1100000000000000000000

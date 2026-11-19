@@ -1,0 +1,4 @@
+# Echidna configuration for Exercise 4
+# Use assertion mode to detect assert() violations
+testMode: assertion
+testLimit: 50000

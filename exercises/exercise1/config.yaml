@@ -1,0 +1,3 @@
+# Echidna configuration for Exercise 1
+testMode: property
+testLimit: 50000

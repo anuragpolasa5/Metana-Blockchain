@@ -1,0 +1,14 @@
+{
+  "name": "batch-call-delegation-7702-script",
+  "version": "1.0.0",
+  "description": "Viem scripts for EIP-7702 and ERC-4337 batch call delegation",
+  "type": "module",
+  "scripts": {
+    "execute": "node batchExecute.js",
+    "execute:4337": "node batchExecute4337.js"
+  },
+  "dependencies": {
+    "viem": "^2.21.0",
+    "dotenv": "^16.4.5"
+  }
+}
